@@ -5,9 +5,14 @@ const configuration = new Configuration({
 });
 
 const openai = new OpenAIApi(configuration);
-const basePromptPrefix = "Write me story .Make sure the story content has few characters and related dto the topic and anre interesting and exciting to read";
+const basePromptPrefix =
+`
+Write me a interesting story about given topic
+
+Title:
+`
+
 const generateAction = async (req, res) => {
-  
   console.log(`API: ${basePromptPrefix}${req.body.userInput}`)
 
   const baseCompletion = await openai.createCompletion({
@@ -18,10 +23,9 @@ const generateAction = async (req, res) => {
   });
   
   const basePromptOutput = baseCompletion.data.choices.pop();
-
   const secondPrompt = 
   `
-  Take the table of contents and title of the blog post below and generate a blog post written in thwe style of Paul Graham. Make it feel like a story. Don't just list the points. Go deep into each one. Explain why.
+  Take the table of contents and title of the story below and generate a story written in the style of Adam silvera. Make it feel like a happy story that enlightens the mood and feel good one
 
   Title: ${req.body.userInput}
 
@@ -36,7 +40,7 @@ const generateAction = async (req, res) => {
     prompt: `${secondPrompt}`,
     // I set a higher temperature for this one. Up to you!
     temperature: 0.85,
-    // I also increase max_tokens.
+		// I also increase max_tokens.
     max_tokens: 1250,
   });
   
