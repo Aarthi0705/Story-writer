@@ -69,7 +69,7 @@ const callGenerateEndpoint = async () => {
 {/* )} */}
         </div>
       </div>
-      <div className="badge-container grow">
+      {/* /* <div className="badge-container grow">
         <a
           href="https://buildspace.so/builds/ai-writer"
           target="_blank"
@@ -80,7 +80,7 @@ const callGenerateEndpoint = async () => {
             <p>build with buildspace</p>
           </div>
         </a>
-      </div>
+      </div> */}
     </div>
   );
 };
